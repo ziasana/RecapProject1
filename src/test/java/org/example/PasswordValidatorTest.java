@@ -51,7 +51,6 @@ class PasswordValidatorTest {
     @CsvFileSource (resources = "/password-data.txt")
     void containsTwoDigits_ReturnTrueWhenContainsAtLeastTwoDigits(String password) {
         assertTrue(PasswordValidator.containsTwoDigits(password));
-        assertAll();
     }
 
 
