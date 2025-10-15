@@ -48,6 +48,7 @@ public class PasswordValidator {
         commonPasswordSet.add("Passwort1".trim().toLowerCase());
         commonPasswordSet.add("12345678".trim().toLowerCase());
         commonPasswordSet.add("Aa345678".trim().toLowerCase());
+        commonPasswordSet.add("password123".trim().toLowerCase());
         return commonPasswordSet.contains(password);
     }
 
