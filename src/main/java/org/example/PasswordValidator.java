@@ -11,45 +11,30 @@ public class PasswordValidator {
         return password.length() >= min;
     }
 
-   public static boolean containsDigits(String password) {
-        if (password.isEmpty())
-            return false;
-        boolean digitsFound = false;
-        for(char c : password.toCharArray()) {
-            if(Character.isDigit(c)) {
-                digitsFound = true;
-                break;
-            }
-        }
-        return digitsFound;
-   }
-   public static boolean containsUpperAndLower(String password){
-        if(password.isEmpty())
-            return false;
-        boolean upperFound = false;
-        boolean lowerFound = false;
-        for(char c: password.toCharArray()){
-            if(!upperFound && Character.isUpperCase(c)) {
-                upperFound = true;
-            }
-            else if(!lowerFound && Character.isLowerCase(c)) {
-                lowerFound = true;
-            }
-            if(upperFound && lowerFound) {
-                break;
-            }
-        }
-        return upperFound && lowerFound;
+  public static boolean containsDigits(String password) {
+       if (password.isEmpty())
+           return false;
+       for (char c : password.toCharArray()) {
+           if (Character.isDigit(c))
+               return true;
+       }
+       return false;
    }
 
+    public static boolean containsUpperAndLower(String password) {
+        boolean hasUpper = false, hasLower = false;
+        for (char c : password.toCharArray()) {
+            if (Character.isUpperCase(c)) hasUpper = true;
+            if (Character.isLowerCase(c)) hasLower = true;
+            if (hasUpper && hasLower) return true;
+        }
+        return false;
+    }
+
+
     public static boolean isCommonPassword(String password) {
-        Set<String> commonPasswordSet = new HashSet<>();
-        commonPasswordSet.add("password".trim().toLowerCase());
-        commonPasswordSet.add("Passwort1".trim().toLowerCase());
-        commonPasswordSet.add("12345678".trim().toLowerCase());
-        commonPasswordSet.add("Aa345678".trim().toLowerCase());
-        commonPasswordSet.add("password123".trim().toLowerCase());
-        return commonPasswordSet.contains(password);
+        return Arrays.asList("password", "passwort1", "12345678", "aa345678", "password123")
+                .contains(password);
     }
 
     public static boolean containsTwoSpecialChar(String password, String allowedChar) {
@@ -60,37 +45,33 @@ public class PasswordValidator {
             // if (password.indexOf(allowed) != -1) {
             if (password.contains(String.valueOf(allowed))) {
                 foundCount++;
+                if (foundCount == 2) return true;
             }
-            if (foundCount == 2)
-                break;
         }
-        return foundCount == 2;
+        return false;
     }
 
     public static boolean containsTwoDigits(String password) {
-        if(password.isEmpty())
+        if (password == null || password.isEmpty())
             return false;
-        int foundCount = 0;
-        for(char c : password.toCharArray()) {
-            if(Character.isDigit(c)) {
-                foundCount++;
+
+        int digitCount = 0;
+        for (char c : password.toCharArray()) {
+            if (Character.isDigit(c)) {
+                digitCount++;
+                if (digitCount == 2) return true;
             }
-            if(foundCount == 2)
-                break;
         }
-        return foundCount == 2;
+        return false;
     }
 
     public static boolean hasSpace(String password) {
         if (password.isEmpty())
             return false;
-        boolean found = false;
         for (char c : password.toCharArray()) {
-            if (Character.isSpaceChar(c)) {
-                found = true;
-                break;
-            }
+            if (Character.isSpaceChar(c))
+                return true;
         }
-        return found;
+        return false;
     }
 }
