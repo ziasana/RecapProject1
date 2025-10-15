@@ -17,7 +17,7 @@ Mit dieser Java-Konsolenanwendung können Benutzer die Stärke eines Passworts �
 | Abc1def     | false     | Sonderzeichen fehlt, Ziffer fehlt, mindestens 8 Zeichen |
 | 22a H2%$2nh | false     | Leerzeichen,                                            |
 | ab1(8&gj    | false     | Großbuchstabe fehlt                                     |       
-| Aa3$567&8   | true      | alle Kriterien                                                    |
+| Aa3$567&8   | true      | alle Kriterien                                          |
 
 
 
