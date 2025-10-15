@@ -8,6 +8,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PasswordValidatorTest {
 
+
+    @ParameterizedTest
+    @CsvFileSource (resources = "/password-data.txt")
+    void hasSpace_ReturnFalseWhenSpaceExist(String password) {
+        assertFalse(PasswordValidator.hasSpace(password));
+    }
+
+
     @ParameterizedTest
     @CsvFileSource (resources = "/password-data.txt")
     void hasMinLength_ReturnFalseWhenLengthIsSmallerThen8(String password) {

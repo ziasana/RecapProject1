@@ -79,4 +79,17 @@ public class PasswordValidator {
         }
         return foundCount == 2;
     }
+
+    public static boolean hasSpace(String password) {
+        if (password.isEmpty())
+            return false;
+        boolean found = false;
+        for (char c : password.toCharArray()) {
+            if (Character.isSpaceChar(c)) {
+                found = true;
+                break;
+            }
+        }
+        return found;
+    }
 }
