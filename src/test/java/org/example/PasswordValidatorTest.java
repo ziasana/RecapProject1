@@ -42,7 +42,7 @@ class PasswordValidatorTest {
     @ParameterizedTest
     @CsvFileSource (resources = "/password-valid-data.txt")
     void containsTwoSpecialChar_ReturnTrueWhenContainsTwoSpecialChar(String password) {
-        String allowedChar="#$%&?@()";
+        String allowedChar="!@#$%^&*()-_+=?.,;:";
         assertTrue(PasswordValidator.containsTwoSpecialChar(password, allowedChar));
     }
 
@@ -61,7 +61,7 @@ class PasswordValidatorTest {
                 () -> assertTrue(PasswordValidator.hasMinLength(password, 8), "Min length check failed"),
                 () -> assertTrue(PasswordValidator.containsUpperAndLower(password), "Upper and lower case check failed"),
                 () -> assertFalse(PasswordValidator.isCommonPassword(password), "Common password check failed"),
-                () -> assertTrue(PasswordValidator.containsTwoSpecialChar(password, "#$%&?@()"), "Two special char \"#$%&?@()\" check failed"),
+                () -> assertTrue(PasswordValidator.containsTwoSpecialChar(password, "!@#$%^&*()-_+=?.,;:"), "Two special char \"#$%&?@()\" check failed"),
                 () -> assertTrue(PasswordValidator.containsTwoDigits(password), "Two digits check failed"),
                 () -> assertFalse(PasswordValidator.hasSpace(password), "Space check failed")
         );

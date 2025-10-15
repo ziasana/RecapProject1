@@ -74,4 +74,22 @@ public class PasswordValidator {
         }
         return false;
     }
+
+    public static String isValid(String password) {
+        String allowedSpecialChar = "!@#$%^&*()-_+=?.,;:";
+        String returnText = "";
+        if (!hasMinLength(password, 8))
+            returnText += "Password must be at least 8 characters long." + '\n';
+        if (!containsUpperAndLower(password))
+            returnText += "Password must contain both uppercase and lowercase letters." + '\n';
+        if (isCommonPassword(password))
+            returnText += "Password is too common." + '\n';
+        if (!containsTwoSpecialChar(password, allowedSpecialChar))
+            returnText += "Password must contain at least two special characters: " + allowedSpecialChar + '\n';
+        if (!containsTwoDigits(password))
+            returnText += "Password must contain at least two digits." + '\n';
+        if (!hasSpace(password))
+            returnText += "Password must not contain spaces." + '\n';
+        return returnText;
+    }
 }
