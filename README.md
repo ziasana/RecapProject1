@@ -24,3 +24,4 @@ Mit dieser Java-Konsolenanwendung können Benutzer die Stärke eines Passworts �
 ### Build/Run/Tests:
 
 lokal: mvn clean verify
+

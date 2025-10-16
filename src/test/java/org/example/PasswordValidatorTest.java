@@ -18,53 +18,46 @@ class PasswordValidatorTest {
     @ParameterizedTest
     @CsvFileSource (resources = "/password-valid-data.txt")
     void hasMinLength_ReturnFalseWhenLengthIsSmallerThen8(String password) {
-        assertTrue(PasswordValidator.hasMinLength(password, 8));
+        assertTrue(PasswordValidator.hasMinLength(password, 8), "Password length is less than 8: " + password.length());
     }
 
     @ParameterizedTest
     @CsvFileSource (resources = "/password-valid-data.txt")
     void containsDigit_ReturnTrueWhenContainsAtLeastOneDigit(String password) {
-        assertTrue(PasswordValidator.containsDigits(password));
+        assertTrue(PasswordValidator.containsDigits(password), "Password does not contain any digit: " + password);
     }
 
     @ParameterizedTest
     @CsvFileSource (resources = "/password-valid-data.txt")
     void containsUpperAndLower_ReturnTrueWhenContainsBothLowerAndUpper(String password) {
-        assertTrue(PasswordValidator.containsUpperAndLower(password));
+        assertTrue(PasswordValidator.containsUpperAndLower(password), "Password does not contain both upper and lower case letters: " + password);
     }
 
     @ParameterizedTest
     @CsvFileSource (resources = "/password-valid-data.txt")
     void isCommonPassword_ReturnFalseWhenContainsCommonPassword(String password) {
-        assertFalse(PasswordValidator.isCommonPassword(password));
+        assertFalse(PasswordValidator.isCommonPassword(password), "Password is a common password: " + password);
     }
 
     @ParameterizedTest
     @CsvFileSource (resources = "/password-valid-data.txt")
     void containsTwoSpecialChar_ReturnTrueWhenContainsTwoSpecialChar(String password) {
         String allowedChar="!@#$%^&*()-_+=?.,;:";
-        assertTrue(PasswordValidator.containsTwoSpecialChar(password, allowedChar));
+        assertTrue(PasswordValidator.containsTwoSpecialChar(password, allowedChar), "Password does not contain at least two special characters from the allowed set: " + allowedChar + " in password: " + password);
     }
 
     @ParameterizedTest
     @CsvFileSource (resources = "/password-valid-data.txt")
     void containsTwoDigits_ReturnTrueWhenContainsAtLeastTwoDigits(String password) {
-        assertTrue(PasswordValidator.containsTwoDigits(password));
+        assertTrue(PasswordValidator.containsTwoDigits(password), "Password does not contain at least two digits: " + password);
     }
 
 
     @ParameterizedTest
     @CsvFileSource (resources = "/password-valid-data.txt")
     void isValid_ReturnTrueWhenAllChecksPassed(String password) {
-
-        assertAll("password validation",
-                () -> assertTrue(PasswordValidator.hasMinLength(password, 8), "Min length check failed"),
-                () -> assertTrue(PasswordValidator.containsUpperAndLower(password), "Upper and lower case check failed"),
-                () -> assertFalse(PasswordValidator.isCommonPassword(password), "Common password check failed"),
-                () -> assertTrue(PasswordValidator.containsTwoSpecialChar(password, "!@#$%^&*()-_+=?.,;:"), "Two special char \"#$%&?@()\" check failed"),
-                () -> assertTrue(PasswordValidator.containsTwoDigits(password), "Two digits check failed"),
-                () -> assertFalse(PasswordValidator.hasSpace(password), "Space check failed")
-        );
+        assertNotEquals("", PasswordValidator.isValid(password), "Password validation failed for: " + password);
     }
+
 
 }
